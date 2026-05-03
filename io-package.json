@@ -4,8 +4,8 @@
     "version": "0.1.0",
     "news": {
       "0.1.0": {
-        "en": "Initial release: Battery, ES, EM, PV monitoring and mode control for Marstek Venus A/D via Open API",
-        "de": "Erstveröffentlichung: Batterie, ES, EM, PV-Überwachung und Modussteuerung für Marstek Venus A/D via Open API"
+        "en": "Initial release",
+        "de": "Erstveröffentlichung"
       }
     },
     "title": "Marstek Venus",
@@ -14,18 +14,16 @@
       "de": "Marstek Venus Speicher"
     },
     "desc": {
-      "en": "Integrates Marstek Venus A/D battery storage systems into ioBroker via the local Open API (UDP). Monitors battery state, PV power, grid/load power and allows mode control (Auto, AI, Manual, Passive, UPS).",
-      "de": "Integriert Marstek Venus A/D Batteriespeicher in ioBroker über die lokale Open API (UDP). Überwacht Batteriezustand, PV-Leistung, Netz-/Lastleistung und erlaubt die Modussteuerung (Auto, AI, Manuell, Passiv, UPS)."
+      "en": "Integrates Marstek Venus A/D battery storage systems into ioBroker via the local Open API (UDP).",
+      "de": "Integriert Marstek Venus A/D Batteriespeicher in ioBroker über die lokale Open API (UDP)."
     },
     "authors": ["Your Name <your@email.com>"],
-    "keywords": ["marstek", "venus", "battery", "energy storage", "solar", "home automation"],
+    "keywords": ["marstek", "venus", "battery", "energy storage", "solar"],
     "license": "MIT",
     "platform": "Javascript/Node.js",
     "main": "main.js",
     "icon": "admin/marstek-venus.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/YourUser/ioBroker.marstek-venus/main/admin/marstek-venus.png",
-    "readme": "https://github.com/YourUser/ioBroker.marstek-venus/blob/main/README.md",
     "loglevel": "info",
     "mode": "daemon",
     "type": "energy",
@@ -38,7 +36,10 @@
     "compact": true,
     "connectionType": "local",
     "dataSource": "poll",
-    "tier": 2
+    "tier": 2,
+    "adminUI": {
+      "config": "jsonConfig"
+    }
   },
   "native": {
     "host": "",
