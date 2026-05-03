@@ -36,10 +36,7 @@
     "compact": true,
     "connectionType": "local",
     "dataSource": "poll",
-    "tier": 2,
-    "adminUI": {
-      "config": "jsonConfig"
-    }
+    "tier": 2
   },
   "native": {
     "host": "",
