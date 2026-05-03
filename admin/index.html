@@ -1,8 +1,77 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"></head>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Marstek Venus</title>
+    <link rel="stylesheet" type="text/css" href="../../lib/css/adapter.css" />
+    <script type="text/javascript" src="../../lib/js/jquery-bundle.js"></script>
+    <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="../../lib/js/translate.js"></script>
+    <script type="text/javascript" src="../../lib/js/adapter-settings.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h3 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 4px; }
+        .row { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 4px; }
+        input[type=text], input[type=number] {
+            width: 400px; max-width: 100%;
+            padding: 8px; border: 1px solid #ccc;
+            border-radius: 4px; font-size: 14px;
+        }
+        .help { font-size: 12px; color: #888; margin-top: 3px; }
+        .info { background:#e8f4fd; border-left:4px solid #1a73e8; padding:10px 14px; margin:20px 0; font-size:13px; line-height:1.6; }
+    </style>
+</head>
 <body>
-<script>
-  // jsonConfig wird verwendet - diese Seite wird nicht genutzt
-  window.location.href = window.location.href.replace('index.html', 'jsonConfig.json');
+<div class="m adapter-container">
+    <h3>Verbindung</h3>
+    <div class="row">
+        <label>IP-Adresse des Marstek Venus</label>
+        <input type="text" id="host" class="value" />
+        <div class="help">Leer lassen für automatische Erkennung per UDP-Broadcast</div>
+    </div>
+    <div class="row">
+        <label>UDP-Port</label>
+        <input type="number" id="port" class="value" />
+        <div class="help">Standard: 30000</div>
+    </div>
+
+    <h3>Abfrage</h3>
+    <div class="row">
+        <label>Abfrageintervall (Sekunden)</label>
+        <input type="number" id="pollInterval" class="value" min="5" max="3600" />
+        <div class="help">Minimum: 5 Sekunden</div>
+    </div>
+    <div class="row">
+        <label>Passive Modus Dauer (Minuten)</label>
+        <input type="number" id="passiveDuration" class="value" min="1" max="1440" />
+        <div class="help">Standard: 60 Minuten</div>
+    </div>
+
+    <div class="info">
+        <b>Voraussetzung:</b> Aktiviere die Local API in der Marstek App unter
+        Einstellungen → Local API (App-Version ≥ 1.6.51).
+    </div>
+</div>
+
+<script type="text/javascript">
+    function load(settings, onChange) {
+        if (!settings) return;
+        $('#host').val(settings.host || '');
+        $('#port').val(settings.port || 30000);
+        $('#pollInterval').val(settings.pollInterval || 30);
+        $('#passiveDuration').val(settings.passiveDuration || 60);
+        $('.value').change(onChange);
+    }
+
+    function save(callback) {
+        callback({
+            host:            $('#host').val().trim(),
+            port:            parseInt($('#port').val()) || 30000,
+            pollInterval:    Math.max(parseInt($('#pollInterval').val()) || 30, 5),
+            passiveDuration: parseInt($('#passiveDuration').val()) || 60
+        });
+    }
 </script>
-</body></html>
+</body>
+</html>
