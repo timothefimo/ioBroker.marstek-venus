@@ -67,7 +67,6 @@
 </div>
 
 <script type="text/javascript">
-    // Warte bis socket verfügbar
     function waitForSocket(cb) {
         if (typeof socket !== 'undefined' && socket && socket.connected) {
             cb();
@@ -76,7 +75,6 @@
         }
     }
 
-    // Instanz-ID ermitteln
     function getInstance() {
         var m = window.location.search.match(/instance=([^&]+)/);
         if (m) return m[1];
@@ -85,19 +83,21 @@
         return 'marstek-venus.0';
     }
 
+    function getEl(id) {
+        return document.getElementById(id);
+    }
+
     var instanceId = getInstance();
-    var originalSettings = {};
 
     function loadSettings() {
         waitForSocket(function() {
             socket.emit('getObject', 'system.adapter.' + instanceId, function(err, obj) {
                 if (err || !obj) { console.error('Load error:', err); return; }
                 var n = obj.native || {};
-                originalSettings = JSON.parse(JSON.stringify(n));
-                $('#host').val(n.host !== undefined ? n.host : '');
-                $('#port').val(n.port !== undefined ? n.port : 30000);
-                $('#pollInterval').val(n.pollInterval !== undefined ? n.pollInterval : 30);
-                $('#passiveDuration').val(n.passiveDuration !== undefined ? n.passiveDuration : 60);
+                getEl('host').value          = n.host !== undefined ? n.host : '';
+                getEl('port').value          = n.port !== undefined ? n.port : 30000;
+                getEl('pollInterval').value  = n.pollInterval !== undefined ? n.pollInterval : 30;
+                getEl('passiveDuration').value = n.passiveDuration !== undefined ? n.passiveDuration : 60;
             });
         });
     }
@@ -105,29 +105,28 @@
     function saveSettings() {
         waitForSocket(function() {
             socket.emit('getObject', 'system.adapter.' + instanceId, function(err, obj) {
-                if (err || !obj) { alert('Fehler: ' + err); return; }
+                if (err || !obj) { alert('Fehler beim Laden: ' + err); return; }
                 obj.native = {
-                    host:            $('#host').val().trim(),
-                    port:            parseInt($('#port').val()) || 30000,
-                    pollInterval:    Math.max(parseInt($('#pollInterval').val()) || 30, 5),
-                    passiveDuration: parseInt($('#passiveDuration').val()) || 60
+                    host:            getEl('host').value.trim(),
+                    port:            parseInt(getEl('port').value) || 30000,
+                    pollInterval:    Math.max(parseInt(getEl('pollInterval').value) || 30, 5),
+                    passiveDuration: parseInt(getEl('passiveDuration').value) || 60
                 };
                 socket.emit('setObject', 'system.adapter.' + instanceId, obj, function(err2) {
                     if (err2) { alert('Speicherfehler: ' + err2); return; }
-                    // Instanz neu starten
                     socket.emit('sendToHost', obj.common.host || 'pi', 'restartAdapter', instanceId, function() {
-                        alert('Einstellungen gespeichert! Adapter wird neu gestartet.');
+                        alert('✓ Gespeichert! Adapter wird neu gestartet.');
                     });
                 });
             });
         });
     }
 
-    $(document).ready(function() {
+    // Warte bis DOM geladen ist - kein jQuery nötig
+    document.addEventListener('DOMContentLoaded', function() {
         loadSettings();
-
-        $('#btn-save').on('click', function() { saveSettings(); });
-        $('#btn-cancel').on('click', function() { loadSettings(); });
+        document.getElementById('btn-save').addEventListener('click', saveSettings);
+        document.getElementById('btn-cancel').addEventListener('click', loadSettings);
     });
 
     // Dummy für adapter-settings.js
