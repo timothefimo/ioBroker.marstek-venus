@@ -1,44 +1,50 @@
 {
-  "type": "panel",
+  "type": "tabs",
   "items": {
-    "host": {
-      "type": "text",
-      "label": "IP-Adresse des Marstek Venus",
-      "help": "Leer lassen für automatische Erkennung per UDP-Broadcast im Netzwerk.",
-      "placeholder": "z.B. 192.168.188.182",
-      "sm": 12,
-      "md": 6
-    },
-    "port": {
-      "type": "number",
-      "label": "UDP-Port",
-      "help": "Standard: 30000 – wie in der Marstek App unter Local API eingestellt.",
-      "min": 1,
-      "max": 65535,
-      "sm": 12,
-      "md": 6
-    },
-    "pollInterval": {
-      "type": "number",
-      "label": "Abfrageintervall (Sekunden)",
-      "help": "Wie oft werden die Werte vom Gerät gelesen? Minimum: 5 Sekunden.",
-      "min": 5,
-      "max": 3600,
-      "sm": 12,
-      "md": 6
-    },
-    "passiveDuration": {
-      "type": "number",
-      "label": "Passive Modus Dauer (Minuten)",
-      "help": "Standard-Dauer beim Aktivieren des Passivmodus über control.setPassivePower.",
-      "min": 1,
-      "max": 1440,
-      "sm": 12,
-      "md": 6
-    },
-    "_info": {
-      "type": "staticText",
-      "text": "Voraussetzung: Bitte aktiviere die Local API in der Marstek App unter Einstellungen → Local API (App-Version ≥ 1.6.51). Das Gerät muss im selben Netzwerk wie ioBroker erreichbar sein."
+    "tab_settings": {
+      "type": "panel",
+      "label": "Einstellungen",
+      "items": {
+        "host": {
+          "type": "text",
+          "label": "IP-Adresse des Marstek Venus",
+          "help": "Leer lassen für automatische Erkennung per UDP-Broadcast",
+          "placeholder": "192.168.188.182",
+          "newLine": true,
+          "sm": 12,
+          "md": 6
+        },
+        "port": {
+          "type": "number",
+          "label": "UDP-Port",
+          "help": "Standard: 30000",
+          "min": 1,
+          "max": 65535,
+          "newLine": false,
+          "sm": 12,
+          "md": 6
+        },
+        "pollInterval": {
+          "type": "number",
+          "label": "Abfrageintervall (Sekunden)",
+          "help": "Minimum: 5 Sekunden",
+          "min": 5,
+          "max": 3600,
+          "newLine": true,
+          "sm": 12,
+          "md": 6
+        },
+        "passiveDuration": {
+          "type": "number",
+          "label": "Passive Modus Dauer (Minuten)",
+          "help": "Standard: 60 Minuten",
+          "min": 1,
+          "max": 1440,
+          "newLine": false,
+          "sm": 12,
+          "md": 6
+        }
+      }
     }
   }
 }
