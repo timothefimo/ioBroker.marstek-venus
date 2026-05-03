@@ -1,0 +1,71 @@
+{
+  "common": {
+    "name": "marstek-venus",
+    "version": "0.1.0",
+    "news": {
+      "0.1.0": {
+        "en": "Initial release: Battery, ES, EM, PV monitoring and mode control for Marstek Venus A/D via Open API",
+        "de": "Erstveröffentlichung: Batterie, ES, EM, PV-Überwachung und Modussteuerung für Marstek Venus A/D via Open API"
+      }
+    },
+    "title": "Marstek Venus",
+    "titleLang": {
+      "en": "Marstek Venus Battery",
+      "de": "Marstek Venus Speicher"
+    },
+    "desc": {
+      "en": "Integrates Marstek Venus A/D battery storage systems into ioBroker via the local Open API (UDP). Monitors battery state, PV power, grid/load power and allows mode control (Auto, AI, Manual, Passive, UPS).",
+      "de": "Integriert Marstek Venus A/D Batteriespeicher in ioBroker über die lokale Open API (UDP). Überwacht Batteriezustand, PV-Leistung, Netz-/Lastleistung und erlaubt die Modussteuerung (Auto, AI, Manuell, Passiv, UPS)."
+    },
+    "authors": ["Your Name <your@email.com>"],
+    "keywords": ["marstek", "venus", "battery", "energy storage", "solar", "home automation"],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "admin/marstek-venus.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/YourUser/ioBroker.marstek-venus/main/admin/marstek-venus.png",
+    "readme": "https://github.com/YourUser/ioBroker.marstek-venus/blob/main/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "energy",
+    "singleton": false,
+    "allowInit": false,
+    "dependencies": [{ "js-controller": ">=5.0.0" }],
+    "globalDependencies": [],
+    "messagebox": false,
+    "subscribable": false,
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "tier": 2
+  },
+  "native": {
+    "host": "",
+    "port": 30000,
+    "pollInterval": 30,
+    "passiveDuration": 60
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": { "name": "Device Information" },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
+}
