@@ -216,7 +216,7 @@ class MarstekVenus extends utils.Adapter {
             if (r.b_power     !== undefined) await this.setState('energyMeter.bPower',     r.b_power,     true);
             if (r.c_power     !== undefined) await this.setState('energyMeter.cPower',     r.c_power,     true);
             if (r.total_power !== undefined) await this.setState('energyMeter.totalPower', r.total_power, true);
-            if (r.ct_state    !== undefined) await this.setState('energyMeter.ctState',    r.ct_state,    true);
+            if (r.ct_state    !== undefined) await this.setState('energyMeter.ctState',    r.ct_state === 1 || r.ct_state === true, true);
         } catch (err) {
             this.log.debug('EM.GetStatus not available: ' + err.message);
         }
