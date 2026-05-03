@@ -1,67 +1,44 @@
 {
   "type": "panel",
   "items": {
-    "connectionHeader": {
-      "type": "header",
-      "text": "Verbindung / Connection",
-      "size": 4
-    },
     "host": {
       "type": "text",
-      "label": "IP-Adresse des Geräts",
-      "help": "Leer lassen für automatische Erkennung per UDP-Broadcast im Netzwerk. / Leave empty for automatic UDP discovery.",
-      "placeholder": "192.168.1.xxx",
+      "label": "IP-Adresse des Marstek Venus",
+      "help": "Leer lassen für automatische Erkennung per UDP-Broadcast im Netzwerk.",
+      "placeholder": "z.B. 192.168.188.182",
       "sm": 12,
       "md": 6
     },
     "port": {
       "type": "number",
       "label": "UDP-Port",
-      "help": "Standard: 30000 (in der Marstek App konfiguriert). / Default: 30000 (configured in Marstek app).",
+      "help": "Standard: 30000 – wie in der Marstek App unter Local API eingestellt.",
       "min": 1,
       "max": 65535,
-      "def": 30000,
       "sm": 12,
       "md": 6
-    },
-    "pollingHeader": {
-      "type": "header",
-      "text": "Abfrage / Polling",
-      "size": 4
     },
     "pollInterval": {
       "type": "number",
       "label": "Abfrageintervall (Sekunden)",
-      "help": "Wie häufig werden die Werte abgefragt? Minimum 5 Sekunden. / How often to poll. Minimum 5 seconds.",
+      "help": "Wie oft werden die Werte vom Gerät gelesen? Minimum: 5 Sekunden.",
       "min": 5,
       "max": 3600,
-      "def": 30,
       "sm": 12,
       "md": 6
-    },
-    "controlHeader": {
-      "type": "header",
-      "text": "Steuerung / Control",
-      "size": 4
     },
     "passiveDuration": {
       "type": "number",
       "label": "Passive Modus Dauer (Minuten)",
-      "help": "Standard-Dauer wenn der Passive-Modus über den Control-Datenpunkt aktiviert wird. / Default duration when passive mode is activated via control state.",
+      "help": "Standard-Dauer beim Aktivieren des Passivmodus über control.setPassivePower.",
       "min": 1,
       "max": 1440,
-      "def": 60,
       "sm": 12,
       "md": 6
     },
-    "infoHeader": {
-      "type": "header",
-      "text": "Voraussetzungen / Requirements",
-      "size": 4
-    },
-    "infoText": {
+    "_info": {
       "type": "staticText",
-      "text": "Bitte aktiviere die 'Local API' in der Marstek App (ab Version 1.6.51) unter Einstellungen → Local API. Notiere den UDP-Port (Standard: 30000). Das Gerät muss im selben Netzwerk wie ioBroker erreichbar sein. / Please enable 'Local API' in the Marstek app (v1.6.51+) under Settings → Local API. Note the UDP port (default: 30000). The device must be reachable on the same network as ioBroker."
+      "text": "Voraussetzung: Bitte aktiviere die Local API in der Marstek App unter Einstellungen → Local API (App-Version ≥ 1.6.51). Das Gerät muss im selben Netzwerk wie ioBroker erreichbar sein."
     }
   }
 }
